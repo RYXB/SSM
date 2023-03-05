@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--    properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?-->
+
+    <!-- 引入properties文件，在当前文件中使用${key}的方式访问value -->
+    <properties resource="jdbc.properties"/>
+
+    <!-- typeAliases:为具体的类型设置别名，在mybatis中即可用别名表示一个具体的类型-->
+    <typeAliases>
+<!--        <typeAlias type="com.atguigu.mybatis.pojo.User" alias="abc"></typeAlias>-->
+
+<!--        没有设置别名的时候默认取类名User为别名，并且不区分大小写-->
+<!--        <typeAlias type="com.atguigu.mybatis.pojo.User"></typeAlias>-->
+
+<!--        通过包来设置别名，包下的所有类都默认设置别名-->
+        <package name="com.atguigu.mybatis.pojo"/>
+    </typeAliases>
+
+    <!--配置连接数据库的环境-->
+    <!--
+    environments:配置连接数据库环境
+    属性：
+    default：设置默认使用的环境id
+    -->
+    <environments default="development">
+        <!--        environment 设置具体的环境，它的id是唯一的不能重复-->
+        <environment id="development">
+            <!--            transactionManager 设置事务管理器
+                 type:设置事物管理的方式
+                 type:"JDBC|MANAGED"
+                 JDBC:使用JDBC中原生的事务管理方式
+                 MANAGED：被管理，例如spring
+            -->
+            <transactionManager type="JDBC"/>
+            <!--            dataSource 设置数据源的类型
+                 type:设置数据源的类型
+                 type:"POOLED|UNPOOLED|JNDI"
+                 POOLED:使用数据库连接池
+                 UNPOOLED：不使用数据库连接池
+                 JNDI：表示使用上下文中的数据源
+            -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://192.168.15.10:3306/ssm?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--引入mybatis的映射文件-->
+    <mappers>
+        <!--        <mapper resource="mappers/UserMapper.xml"/>-->
+        <!--        以包的方式引入映射文件 1.mapper接口和映射文件所在的包必须一致 2.mapper接口的名字和映射文件的名字必须一致-->
+
+        <package name="com.atguigu.mybatis.mapper"/>
+    </mappers>
+</configuration>
