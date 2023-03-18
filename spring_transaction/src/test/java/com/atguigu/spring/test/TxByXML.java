@@ -21,16 +21,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 2、标识在类上，则类中的所有方法都会被事务管理
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:tx-annotation.xml")
-public class TxByAnnotation {
+@ContextConfiguration("classpath:tx-xml.xml")
+public class TxByXML {
 
     @Autowired
     private BookController bookController;
 
     @Test
     public void testBuyBook(){
-//        bookController.buyBook(1,1);
-        bookController.checkout(1,new Integer[]{1,2});
+        bookController.buyBook(1,1);
+//        bookController.checkout(1,new Integer[]{1,2});
     }
 
 }
