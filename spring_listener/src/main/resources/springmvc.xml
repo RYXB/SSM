@@ -30,13 +30,8 @@
         </property>
     </bean>
 
-    <mvc:default-servlet-handler/>
-
     <mvc:annotation-driven/>
 
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
-
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    </bean>
 
 </beans>
